@@ -19,7 +19,7 @@ class Browser {
 	}
 	// Public Functions to Scrap websites
 	async startbrowser(){
-		this.browser = await puppeteer.launch();
+		this.browser = await puppeteer.launch({ args: ['--no-sandbox'] });
 	}
 	async scrapNews(channel) { // Newpage() and GoTo(mainPage) and channel.send(news);
 		// Prepare
