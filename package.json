@@ -8,6 +8,9 @@
   },
   "author": "Brahim",
   "license": "ISC",
+  "engines":{
+  	"node":"8.11.1"
+  },
   "dependencies": {
     "discord.js": "^11.4.2",
     "puppeteer": "^1.9.0",
