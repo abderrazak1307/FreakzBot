@@ -329,4 +329,4 @@ bot.on('message', e => {
 });
 
 // Bot logs in
-bot.login(auth.token); 
+bot.login(process.env.BOT_TOKEN); 
