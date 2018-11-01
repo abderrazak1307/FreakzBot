@@ -27,14 +27,12 @@ class Browser {
 		var page = await this.browser.newPage();
 		await page.setViewport({width: 1280, height: 720})
 		await page.goto(mainPageURL,{waitUntil: 'domcontentloaded'});
-
 		// Scrap
 		var result = await page.evaluate(() => {
 			let news = document.querySelectorAll('.box_content_middle_real')[1].innerText;
 			return{news}
 		});
 		// POST Result
-		channel.stopTyping();
 		message.edit(result.news);
 		page.close();
 	}
@@ -62,7 +60,6 @@ class Browser {
 			return{fixes}
 		});
 		// POST Result
-		channel.stopTyping();
 		message.edit(result.fixes);
 		page.close();
 	}
@@ -109,13 +106,12 @@ class Browser {
 						specs += "\n" + elements[i].innerText;
 					}
 				}
-
 				return{name, img, color, specs}
 			}
 		});		
 		// Post result	
 		if(result.error){
-			channel.stopTyping();
+			
 			message.edit("Here you go:",{
 				embed: {
 	            	color: 0xFFFFFF,
@@ -127,7 +123,7 @@ class Browser {
 			return;
 		}
 		if(result.name){
-			channel.stopTyping();
+			
 			message.edit("Here you go:",{
 				embed: {
 		        	thumbnail: {
@@ -143,7 +139,7 @@ class Browser {
 		        }
 		  	});
 		}else{
-			channel.stopTyping();
+			
 			message.edit("Here you go:",{
 				embed: {
 		            color: 0xFFFFFF,
@@ -180,7 +176,6 @@ class Browser {
 		});
 		// Post result
 		if(result.error){
-			channel.stopTyping();
 			message.edit("Here you go:",{
 				embed: {
 	            	color: 0xFFFFFF,
@@ -200,7 +195,6 @@ class Browser {
 	    		file: "Armory/"+index+".png"
 		  	});
 		  	message.edit("Done Working on " + player + ". Check result.");
-		  	channel.stopTyping();
 		  	await fs.unlink("Armory/"+index+".png", (err) => {
 				if (err) throw err;
 				console.log("Armory/"+index+".png was deleted");
@@ -224,7 +218,6 @@ class Browser {
 			return{uptime, players, record}
 		});
 		// POST Result
-		channel.stopTyping();
 		message.edit("Here you go:",{
 				embed: {
 	            color: 3447003,
@@ -282,7 +275,6 @@ bot.on('message', e => {
     	command = e.content.split(" ")[0];
     	// LOOK UP PLAYER IN ARMORY
     	if(command == '?armory'){
-    		e.channel.startTyping();
     		var player = e.content.split(" ").slice(1).join(" ").replace(" ", "").replace(/[^\w]/gi, "");
     		browsers[e.guild.id].scrapArmory(e.channel,player);
     		utils.cleanup(e,180000);
@@ -290,7 +282,6 @@ bot.on('message', e => {
 
     	// LOOK UP ITEM IN ITEM FINDER
     	if(command == '?item'){
-    		e.channel.startTyping();
     		var item = e.content.split(" ").slice(1).join(" ").split("&")[0];
     		browsers[e.guild.id].scrapItem(e.channel,item);
     		utils.cleanup(e,180000);
@@ -298,31 +289,28 @@ bot.on('message', e => {
 
     	// LOOK UP LATEST NEWS
     	else if(command == '?news'){
-    		e.channel.startTyping();
     		browsers[e.guild.id].scrapNews(e.channel);
     		utils.cleanup(e,180000);
     	}
 
     	// LOOK UP LATEST FIXES
     	else if(command == '?fixes'){
-    		e.channel.startTyping();
     		browsers[e.guild.id].scrapFixes(e.channel);
     		utils.cleanup(e,180000);
     	}
 
     	// GET STATS
     	else if(command == '?stats'){
-    		e.channel.startTyping();
     		browsers[e.guild.id].scrapStats(e.channel);
     		utils.cleanup(e,180000);
     	}
     	else if(command == '?help'){
     		e.author.send("**Commands:**\n\n"
-	    		+"**$item <itemID or itemName>:** to look up item info\n"
-	    		+"**$armory <playerName>:** to get info about a player's armory\n"
-	    		+"**$fixes:** to look up all recent fixes\n"
-	    		+"**$news:** to look up the latest news from Freakz\n"
-	    		+"**$stats:** to get stats about Freakz");
+	    		+"**?item <itemID or itemName>:** to look up item info\n"
+	    		+"**?armory <playerName>:** to get info about a player's armory\n"
+	    		+"**?fixes:** to look up all recent fixes\n"
+	    		+"**?news:** to look up the latest news from Freakz\n"
+	    		+"**?stats:** to get stats about Freakz");
     		utils.cleanup(e,5000);
     	}
     }
