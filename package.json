@@ -13,7 +13,8 @@
   	"start":"node app.js"
   },
   "engines":{
-  	"node":"8.11.1"
+  	"node":"8.11.1",
+    "npm": ">= 4.4.0"
   },
   "dependencies": {
     "discord.js": "^11.4.2",
