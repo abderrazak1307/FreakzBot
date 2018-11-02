@@ -42,10 +42,12 @@ class Browser {
 		});
 		// POST Result
 		if(result.news){
-			message.edit({
+			message.edit("Here you go",{
 				embed: {
-				description: result.news,
-	            image: {url: result.image}
+					title: "Latest news:"
+					color: 0xFFFFFF,
+					description: result.news,
+	            	image: {url: result.image}
 	        }
 	  	  });
 		}
