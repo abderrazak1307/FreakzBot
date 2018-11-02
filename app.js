@@ -52,7 +52,7 @@ class Browser {
 				if(rowElements[i].innerText && rowElements[i].querySelector('font')){
 					if(rowElements[i].querySelector('font').getAttribute("color") == "green"){
 						let info = rowElements[i].innerText.replace("[fixed] ","");
-						fixes += "\n>> :white_check_mark: " + info + ".";
+						fixes += "\n>> :white_check_mark:" + info + ".";
 						j++;
 					}
 				}
