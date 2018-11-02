@@ -30,10 +30,25 @@ class Browser {
 		// Scrap
 		var result = await page.evaluate(() => {
 			let news = document.querySelectorAll('.box_content_middle_real')[1].innerText;
-			return{news}
+			let image = "";
+			let images = document.querySelectorAll('.box_content_middle_real')[1].querySelectorAll('img');
+			for(var i =0; i< images.length;i++){
+				if(!images[i].getAttribute("src").includes("fb")){
+					image = images[i].getAttribute("src");
+					break;
+				}
+			}
+			return{news,image}
 		});
 		// POST Result
-		message.edit(result.news);
+		if(result.news){
+			message.edit({
+				embed: {
+				description: result.news,
+	            image: {url: result.image}
+	        }
+	  	  });
+		}
 		page.close();
 	}
 	async scrapFixes(channel) { // Newpage() and GoTo(forumsFixedPage) and channel.send(fixes);
