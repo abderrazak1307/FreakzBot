@@ -46,13 +46,13 @@ class Browser {
 		// Scrap
 		var result = await page.evaluate(() => {
 			var fixes = "Last 10 Fixes:";
-			var rowElements = document.querySelectorAll('div > .topictitle > a');
+			let rowElements = document.querySelectorAll('div > .topictitle > a');
 			var j = 0;
 			for(var i = 0; j<10 ;i++){
 				if(rowElements[i].innerText && rowElements[i].querySelector('font')){
 					if(rowElements[i].querySelector('font').getAttribute("color") == "green"){
-						var info = rowElements[i].innerText.replace("[fixed] ","");
-						fixes += "\n>> :white_check_mark:" + info;
+						let info = rowElements[i].innerText.replace("[fixed] ","");
+						fixes += "\n>> :white_check_mark: " + info + ".";
 						j++;
 					}
 				}
@@ -111,7 +111,6 @@ class Browser {
 		});		
 		// Post result	
 		if(result.error){
-			
 			message.edit("Here you go:",{
 				embed: {
 	            	color: 0xFFFFFF,
