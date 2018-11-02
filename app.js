@@ -51,7 +51,7 @@ class Browser {
 			for(var i = 0; j<10 ;i++){
 				if(rowElements[i].innerText && rowElements[i].querySelector('font')){
 					if(rowElements[i].querySelector('font').getAttribute("color") == "green"){
-						var info = rowElements[i].innerText.split("[fixed] ")[1];
+						var info = rowElements[i].innerText.replace("[fixed] ","");
 						fixes += "\n>> :white_check_mark:" + info;
 						j++;
 					}
