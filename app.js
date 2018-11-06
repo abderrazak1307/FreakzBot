@@ -44,7 +44,7 @@ class Browser {
 		if(result.news){
 			message.edit("Here you go",{
 				embed: {
-					title: "Latest news:"
+					title: "Latest news:",
 					color: 0xFFFFFF,
 					description: result.news,
 	            	image: {url: result.image}
